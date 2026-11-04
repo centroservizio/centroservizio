@@ -1,0 +1,53 @@
+[
+  {
+    "id": "USR-ADMIN-01",
+    "name": "Amministratore Ufficio",
+    "email": "admin@centroservizicarpi.it",
+    "phone": "3511830385",
+    "passwordHash": "pbkdf2:100000:562c37b5c051e98b27bc05efd6f18b76:91847cf9aa4ddc500d64645b90e4a4d036062baefe7102f4a8885fd1ed3dc38baefaeb661c3310354cc326e47e34444e1c1d1f8322457d21abce4d3baefcfd64",
+    "role": "admin",
+    "status": "active",
+    "createdAt": "2026-11-01T00:16:34.707Z",
+    "lastLogin": "2026-11-04T14:09:19.404Z",
+    "updatedAt": "2026-11-03T23:14:35.201Z"
+  },
+  {
+    "id": "USR-1793492264046-963",
+    "name": "Tariqul Islam",
+    "email": "centroserviziocarpi@gmail.com",
+    "phone": "3511830385",
+    "passwordHash": "ce87d8eacec4f7d9ee40a74faa9f8594:93bec4fda6a5c9430cc9baa7cbdf755fea828a5f2032472fea3585d896ee65931559e27dccf7d414de4863fdd1c639b1382601165b7c7bade8bad2102ead7542",
+    "role": "customer",
+    "status": "active",
+    "otp": null,
+    "otpExpiresAt": null,
+    "createdAt": "2026-11-01T00:17:44.046Z",
+    "lastLogin": "2026-11-01T00:17:44.054Z"
+  },
+  {
+    "id": "USR-1793574539818-624",
+    "name": "SAGOR HOSSAIN",
+    "email": "udcsagorhossain3@gmail.com",
+    "phone": "3511904644",
+    "passwordHash": "pbkdf2:100000:f693845d18ecced9786db9d2c5e8072a:4b0a008584a101ad3550b47095109a2d4bba5287704779941ecf47137982346d8cb1c7cf613fa32ff97fe3e00aa82e43340db227b9198af5d116191e2b383d54",
+    "role": "customer",
+    "status": "active",
+    "otp": null,
+    "otpExpiresAt": null,
+    "createdAt": "2026-11-01T23:08:59.819Z",
+    "lastLogin": "2026-11-03T23:12:31.961Z"
+  },
+  {
+    "id": "USR-1793747827112-144",
+    "name": "HOWLADER JASIMUDDIN",
+    "email": "jasim01926@gmail.com",
+    "phone": "3476987689",
+    "passwordHash": "pbkdf2:100000:216c3d07fc1b1158c5772137b43697f7:1e8392e0185a75fb0dae4ae27ab212dc5a9d4d747b3bcd19269209b4103342e363edeed6ab3992fd6f81fed9520ab4568a0d03d4b45726cc4b793bd9321dfce0",
+    "role": "customer",
+    "status": "active",
+    "otp": null,
+    "otpExpiresAt": null,
+    "createdAt": "2026-11-03T23:17:07.145Z",
+    "lastLogin": "2026-11-03T23:17:46.712Z"
+  }
+]

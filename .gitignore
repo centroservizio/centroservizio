@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env
+
+# System & Editor files
+.DS_Store
+Thumbs.db
+*.log
+*.bak
+
+# Sub-projects
+union-parishad/
+
+# Uploaded client documents (Preserve folder structure with .gitkeep)
+data/documenti/*
+!data/documenti/.gitkeep
+data/ricevute/*
+!data/ricevute/.gitkeep
+data/consegne/*
+!data/consegne/.gitkeep
+data/inps_downloads/*
+!data/inps_downloads/.gitkeep
+data/fatture/*
+!data/fatture/.gitkeep

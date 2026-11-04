@@ -1,0 +1,14 @@
+{
+  "permesso_soggiorno": {
+    "enabled": true,
+    "targetEmail": "centroserviziocarpi@gmail.com",
+    "serviceName": "Permesso di Soggiorno (Rinnovo / Aggiornamento / UE)",
+    "description": "Inoltro automatico istruttoria Questura / Patronato"
+  },
+  "tessera_sanitaria": {
+    "enabled": true,
+    "targetEmail": "centroserviziocarpi@gmail.com",
+    "serviceName": "Tessera Sanitaria & Iscrizione ASL",
+    "description": "Inoltro automatico richieste ASL / Sportello Sanitario"
+  }
+}

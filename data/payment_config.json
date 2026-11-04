@@ -1,0 +1,31 @@
+{
+  "bonifico": {
+    "enabled": true,
+    "iban": "LU448100SATI94719510",
+    "intestatario": "CENTRO SERVIZIO STRANIERO",
+    "banca": "Satispay Europe sa",
+    "bicSwift": "SATYLUL1XXX",
+    "note": "Inserire obbligatoriamente il numero pratica nella causale del bonifico bancario."
+  },
+  "postepay": {
+    "enabled": false,
+    "numeroCarta": "4023 6000 0000 0000",
+    "intestatario": "CENTRO SERVIZIO STRANIERO",
+    "codiceFiscale": "RSSMRA80A01H501U",
+    "note": "Ricarica effettuabile presso Uffici Postali, tabaccherie PuntoLis o online."
+  },
+  "paypal": {
+    "enabled": false,
+    "emailOrLink": "https://paypal.me/centroserviziocarpi",
+    "intestatario": "Centro Servizio Straniero",
+    "note": "Pagamento rapido e sicuro con conto PayPal o carta di credito/debito."
+  },
+  "sede": {
+    "enabled": false,
+    "indirizzo": "Via Berengario, 12 - 41012 Carpi (MO)",
+    "orari": "Lun - Ven: 09:00 - 13:00 / 15:00 - 19:00",
+    "metodi": "Contanti, Bancomat, POS Carta",
+    "note": "Pagamento diretto allo sportello con rilascio immediato della ricevuta."
+  },
+  "istruzioniGenerali": "Effettuare il saldo e caricare la ricevuta entro 48 ore dalla presente richiesta per procedere con la lavorazione."
+}

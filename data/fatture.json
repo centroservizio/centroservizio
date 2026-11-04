@@ -1,0 +1,330 @@
+[
+  {
+    "invoiceNumber": "FATTURA-2026-001",
+    "createdAt": "2026-10-28T23:04:57.741Z",
+    "customerName": "Mario Rossi",
+    "customerEmail": "centroserviziocarpi@gmail.com",
+    "customerAddress": "Via Garibaldi 12, 41012 Carpi (MO)",
+    "codiceFiscale": "RSSMRA85M01C722W",
+    "items": [
+      {
+        "description": "Consulenza e Pratica Targa Monopattino Elettrico MIT",
+        "qty": 1,
+        "unitPrice": 45
+      },
+      {
+        "description": "Gestione Pratica Portale dell Automobilista",
+        "qty": 1,
+        "unitPrice": 15
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "28/11/2026",
+    "taxRate": 0,
+    "notes": "Pagamento con Bonifico Bancario indicando il numero di fattura nella causale.",
+    "linkedApplication": "CSS-2026-TEST01",
+    "subtotal": 60,
+    "taxAmount": 0,
+    "grandTotal": 60,
+    "status": "inviata",
+    "pdfFile": "FATTURA-2026-001.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "FATTURA-2026-002",
+    "createdAt": "2026-10-28T23:39:46.663Z",
+    "customerName": "SAGOR HOSSAIN",
+    "customerEmail": "udcsagorhossain@gmail.com",
+    "customerAddress": "via ponticello argenello 8",
+    "codiceFiscale": "1234567890",
+    "items": [
+      {
+        "description": "APPOUNTAMENTO  PERMESSO DI SOGGIRNO",
+        "qty": 1,
+        "unitPrice": 41
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "29/11/2026",
+    "taxRate": 0,
+    "notes": "TU APPOUNTAMENTO RR CC/SAGORHOSSAIN",
+    "linkedApplication": "11111111",
+    "subtotal": 41,
+    "taxAmount": 0,
+    "grandTotal": 41,
+    "status": "inviata",
+    "pdfFile": "FATTURA-2026-002.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "FQ-2026-001",
+    "createdAt": "2026-10-29T00:05:10.470Z",
+    "customerName": "Ali Ahmed",
+    "customerEmail": "centroserviziocarpi@gmail.com",
+    "customerAddress": "Via Garibaldi 10, Carpi (MO)",
+    "codiceFiscale": "HMDLAA90A01Z249A",
+    "items": [
+      {
+        "description": "Rinnovo Permesso di Soggiorno Lavoro Subordinato",
+        "qty": 1,
+        "unitPrice": 70
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "",
+    "taxRate": 0,
+    "notes": "Pagamento a saldo ricevuto tramite bonifico bancario.",
+    "subtotal": 70,
+    "taxAmount": 0,
+    "grandTotal": 70,
+    "docType": "quietanzata",
+    "paymentMethod": "Bonifico Bancario",
+    "paymentDate": "29/10/2026",
+    "paymentRef": "TRN-984729184",
+    "status": "saldata",
+    "pdfFile": "FQ-2026-001.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "RIC-2026-001",
+    "createdAt": "2026-10-29T00:05:17.309Z",
+    "customerName": "Fatima Begum",
+    "customerEmail": "centroserviziocarpi@gmail.com",
+    "customerAddress": "Via Ugo da Carpi 44, Carpi (MO)",
+    "codiceFiscale": "BGMFTM88M41Z249X",
+    "items": [
+      {
+        "description": "Compilazione e Invio Modello ISEE 2026",
+        "qty": 1,
+        "unitPrice": 30
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "",
+    "taxRate": 0,
+    "notes": "Ricevuto importo in contanti presso sede di Carpi.",
+    "subtotal": 30,
+    "taxAmount": 0,
+    "grandTotal": 30,
+    "docType": "ricevuta",
+    "paymentMethod": "Contanti",
+    "paymentDate": "29/10/2026",
+    "paymentRef": "",
+    "status": "saldata",
+    "pdfFile": "RIC-2026-001.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "PREV-2026-001",
+    "createdAt": "2026-10-29T00:05:23.962Z",
+    "customerName": "Rahim Khan",
+    "customerEmail": "centroserviziocarpi@gmail.com",
+    "customerAddress": "Via Berengario 5, Carpi (MO)",
+    "items": [
+      {
+        "description": "Pratica Ricongiungimento Familiare (Nulla Osta Prefettura)",
+        "qty": 1,
+        "unitPrice": 150
+      },
+      {
+        "description": "Certificato di Idoneita Alloggiativa",
+        "qty": 1,
+        "unitPrice": 50
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "",
+    "taxRate": 0,
+    "notes": "Preventivo valido 30 giorni.",
+    "subtotal": 200,
+    "taxAmount": 0,
+    "grandTotal": 200,
+    "docType": "preventivo",
+    "paymentMethod": "Bonifico Bancario",
+    "paymentDate": "",
+    "paymentRef": "",
+    "status": "inviata",
+    "pdfFile": "PREV-2026-001.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "RIC-2026-002",
+    "createdAt": "2026-10-29T00:14:26.201Z",
+    "customerName": "robiul",
+    "customerEmail": "udcsagorhossain3@gmail.com",
+    "customerAddress": "via ponticello",
+    "codiceFiscale": "hiufefncericjbufere",
+    "items": [
+      {
+        "description": "appoinment",
+        "qty": 1,
+        "unitPrice": 0
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "28/11/2026",
+    "taxRate": 0,
+    "notes": "sagor",
+    "linkedApplication": "11111111",
+    "subtotal": 0,
+    "taxAmount": 0,
+    "grandTotal": 0,
+    "docType": "ricevuta",
+    "paymentMethod": "Carta POS / Bancomat",
+    "paymentDate": "29/10/2026",
+    "paymentRef": "1234567654321",
+    "status": "saldata",
+    "pdfFile": "RIC-2026-002.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "FQ-2026-002",
+    "createdAt": "2026-10-29T15:02:44.512Z",
+    "customerName": "Test Customer",
+    "customerEmail": "centroserviziocarpi@gmail.com",
+    "customerAddress": "Via Roma 1, Carpi (MO)",
+    "codiceFiscale": "TSTCST90A01Z249A",
+    "items": [
+      {
+        "description": "Appuntamento⁠ per rinovo permesso di soggiorno",
+        "qty": 1,
+        "unitPrice": 41.75
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "",
+    "taxRate": 0,
+    "notes": "Buona giornata.\nUfficio Migranti⁠ CGIL",
+    "linkedApplication": "CSS2026-41021",
+    "subtotal": 41.75,
+    "taxAmount": 0,
+    "grandTotal": 41.75,
+    "docType": "quietanzata",
+    "paymentMethod": "Contanti",
+    "paymentDate": "29/10/2026",
+    "paymentRef": "",
+    "status": "saldata",
+    "pdfFile": "FQ-2026-002.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "RIC-2026-003",
+    "createdAt": "2026-10-29T15:04:00.818Z",
+    "customerName": "HOWLADER JAHERUL",
+    "customerEmail": "siyamhowlader090@gmail.com",
+    "customerAddress": "VIA BARI N 25",
+    "codiceFiscale": "HWLJRL98A10Z249C",
+    "items": [
+      {
+        "description": "Appuntamento per rinovo permesso di soggiorno",
+        "qty": 1,
+        "unitPrice": 41.75
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "28/11/2026",
+    "taxRate": 0,
+    "notes": "Gentile HOWLADER JAHERUL,\nti inviamo in allegato l'appuntamento per il rinnovo del tuo permesso di soggiorno in Questura.\n\nTi ricordiamo che devi portare con te:\n\n•⁠  ⁠Permesso giallo originale (vecchio)\n•⁠  ⁠1 Marca da bollo di 16,00 euro\n•⁠  ⁠4 Foto tessera\n\n•⁠  ⁠Dichiarazione di ospitalità RECENTE timbrata dalla Questura (con copia dei documenti di identità del dichiarante e del cessionario e copia del contratto di affitto o atto di proprietà),oppure se hai la residenza CERTIFICATO DI RESIDENZA\n\n•⁠  ⁠Se si è ricevuto il parere negativo dalla Commissione, copia del ricorso da depositare (entro 30 giorni dalla notifica del parere negativo)\n\nBuona giornata.\nUfficio Migranti CGIL",
+    "linkedApplication": "CSS2026-41021",
+    "subtotal": 41.75,
+    "taxAmount": 0,
+    "grandTotal": 41.75,
+    "docType": "ricevuta",
+    "paymentMethod": "Carta POS / Bancomat",
+    "paymentDate": "29/10/2026",
+    "paymentRef": "REF-udcsagorhossain@gmail.com",
+    "status": "saldata",
+    "pdfFile": "RIC-2026-003.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "RIC-2026-004",
+    "createdAt": "2026-10-29T15:12:30.921Z",
+    "customerName": "FAKIR MD SOMRAJ",
+    "customerEmail": "somrajfakir@gmail.com",
+    "customerAddress": "VIA GIOVANNI E SABASTIANO CABOTO N48A",
+    "codiceFiscale": "FKRMSM95B07Z249J",
+    "items": [
+      {
+        "description": "Appuntamento per rinnovo permesso di soggiorno",
+        "qty": 1,
+        "unitPrice": 41.75
+      }
+    ],
+    "invoiceDate": "29/10/2026",
+    "dueDate": "28/11/2026",
+    "taxRate": 0,
+    "notes": "Gentile FAKIR MD SOMRAJ,\nti inviamo in allegato l'appuntamento per il rinnovo del tuo permesso di soggiorno in Questura.\n\nTi ricordiamo che devi portare con te:\n\n•⁠  ⁠Permesso giallo originale (vecchio)\n•⁠  ⁠1 Marca da bollo di 16,00 euro\n•⁠  ⁠4 Foto tessera\n\n•⁠  ⁠Dichiarazione di ospitalità RECENTE timbrata dalla Questura (con copia dei documenti di identità del dichiarante e del cessionario e copia del contratto di affitto o atto di proprietà),oppure se hai la residenza CERTIFICATO DI RESIDENZA\n\n•⁠  ⁠Se si è ricevuto il parere negativo dalla Commissione, copia del ricorso da depositare (entro 30 giorni dalla notifica del parere negativo)\n\nBuona giornata.\nUfficio Migranti CGIL",
+    "linkedApplication": "CSS-2026-41022",
+    "subtotal": 41.75,
+    "taxAmount": 0,
+    "grandTotal": 41.75,
+    "docType": "ricevuta",
+    "paymentMethod": "Carta POS / Bancomat",
+    "paymentDate": "29/10/2026",
+    "paymentRef": "REF-udcsagorhossain@gmail.com",
+    "status": "saldata",
+    "pdfFile": "RIC-2026-004.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "PREV-2026-002",
+    "createdAt": "2026-11-04T00:03:43.866Z",
+    "customerName": "howlader jasimuddin",
+    "customerEmail": "jasim01926@gmail.com",
+    "customerAddress": "via ponticello",
+    "codiceFiscale": "HWLJMD94R24Z249Q",
+    "items": [
+      {
+        "description": "ESTRATTO CONTRO CONTRIBUTI DI INPS",
+        "qty": 1,
+        "unitPrice": 18.75
+      }
+    ],
+    "invoiceDate": "04/11/2026",
+    "dueDate": "04/12/2026",
+    "taxRate": 0,
+    "notes": "",
+    "linkedApplication": "CSS-2026-41022",
+    "subtotal": 18.75,
+    "taxAmount": 0,
+    "grandTotal": 18.75,
+    "docType": "preventivo",
+    "paymentMethod": "Bonifico Bancario",
+    "paymentDate": "04/11/2026",
+    "paymentRef": "",
+    "status": "inviata",
+    "pdfFile": "PREV-2026-002.pdf",
+    "emailSent": true
+  },
+  {
+    "invoiceNumber": "RIC-2026-005",
+    "createdAt": "2026-11-04T00:27:25.319Z",
+    "customerName": "howlader jasimuddin",
+    "customerEmail": "jasim01926@gmail.com",
+    "customerAddress": "via ponticello",
+    "codiceFiscale": "HWLJMD94R24Z249Q",
+    "items": [
+      {
+        "description": "CERTIFICATO RESIDENZA",
+        "qty": 1,
+        "unitPrice": 16
+      }
+    ],
+    "invoiceDate": "04/11/2026",
+    "dueDate": "04/12/2026",
+    "taxRate": 0,
+    "notes": "",
+    "linkedApplication": "",
+    "subtotal": 16,
+    "taxAmount": 0,
+    "grandTotal": 16,
+    "docType": "ricevuta",
+    "paymentMethod": "Bonifico Bancario",
+    "paymentDate": "04/11/2026",
+    "paymentRef": "",
+    "status": "saldata",
+    "pdfFile": "RIC-2026-005.pdf",
+    "emailSent": true
+  }
+]
