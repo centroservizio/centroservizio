@@ -254,24 +254,29 @@ function requireAdmin(req, res, next) {
 // GUARD ALL ADMIN ENDPOINTS
 app.use('/api/admin', requireAdmin);
 
-// Initialize default admin if no admin exists
+// Initialize default admin if no admin exists, or sync password from env
 (function initDefaultAdmin() {
   const users = loadUsers();
-  const hasAdmin = users.some(u => u.role === 'admin' && u.status !== 'deleted');
-  if (!hasAdmin) {
-    const defaultAdmin = {
+  let admin = users.find(u => u.role === 'admin' && u.status !== 'deleted');
+  const targetPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  if (!admin) {
+    admin = {
       id: 'USR-ADMIN-01',
       name: 'Amministratore Ufficio',
       email: 'admin@centroservizicarpi.it',
       phone: '3511830385',
-      passwordHash: hashPassword('admin123'),
+      passwordHash: hashPassword(targetPassword),
       role: 'admin',
       status: 'active',
       createdAt: new Date().toISOString()
     };
-    users.push(defaultAdmin);
+    users.push(admin);
     saveUsers(users);
-    console.log('[Auth] Creato utente amministratore predefinito: admin@centroservizicarpi.it / admin123');
+    console.log('[Auth] Creato utente amministratore predefinito: admin@centroservizicarpi.it');
+  } else if (process.env.ADMIN_PASSWORD) {
+    admin.passwordHash = hashPassword(process.env.ADMIN_PASSWORD);
+    saveUsers(users);
+    console.log('[Auth] Password admin sincronizzata con ADMIN_PASSWORD da ambiente.');
   }
 })();
 
