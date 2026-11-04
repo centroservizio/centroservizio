@@ -4,7 +4,7 @@
     "name": "Amministratore Ufficio",
     "email": "admin@centroservizicarpi.it",
     "phone": "3511830385",
-    "passwordHash": "pbkdf2:100000:562c37b5c051e98b27bc05efd6f18b76:91847cf9aa4ddc500d64645b90e4a4d036062baefe7102f4a8885fd1ed3dc38baefaeb661c3310354cc326e47e34444e1c1d1f8322457d21abce4d3baefcfd64",
+    "passwordHash": "pbkdf2:100000:d451d94b697115b6a20bc946a32c2bf9:0591b66f0365bbe5008bb61bec20b6d8a8f1b55ee9e62bd3d44182bc22b330ff6833714b8ce2b766a64c64c18c9ca8952dcb02114e0b6730759dd7c780413247",
     "role": "admin",
     "status": "active",
     "createdAt": "2026-11-01T00:16:34.707Z",
