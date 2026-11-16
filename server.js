@@ -857,7 +857,26 @@ async function generateAllegato1PDF(data) {
 
 // Nodemailer Email Sending Helper
 async function sendEmail(to, subject, html, attachments = []) {
-  // Option 1: Brevo HTTPS REST API (Port 443 - Works seamlessly on Render Free Tier!)
+  // Option 1: Google Apps Script Webhook (Port 443 HTTPS - Uses real Gmail account, completely free!)
+  if (process.env.GMAIL_WEBHOOK_URL) {
+    try {
+      const gRes = await fetch(process.env.GMAIL_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ to, subject, html })
+      });
+      if (gRes.ok) {
+        console.log('[Email Google Script HTTPS] Inviata con successo a:', to);
+        return true;
+      } else {
+        console.error('[Email Google Script Error]:', await gRes.text());
+      }
+    } catch (err) {
+      console.error('[Email Google Script Catch]:', err.message);
+    }
+  }
+
+  // Option 2: Brevo HTTPS REST API (Port 443 - Works seamlessly on Render Free Tier!)
   if (process.env.BREVO_API_KEY) {
     try {
       const senderEmail = process.env.EMAIL_USER || 'centroserviziocarpi@gmail.com';
