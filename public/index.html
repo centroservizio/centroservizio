@@ -4098,7 +4098,11 @@ async function doCustomerRegister(e) {
       body: JSON.stringify({ name, email, phone, password })
     });
     const data = await res.json();
-    if (data.success && data.requiresOtp) {
+    if (data.success && data.token) {
+      setClientAuthToken(data.token);
+      alert('🎉 Registrazione completata con successo! Benvenuto ' + (data.user ? data.user.name : '') + '.');
+      loadCustomerDashboardData();
+    } else if (data.success && data.requiresOtp) {
       currentPendingOtpEmail = data.email;
       document.getElementById('viewPortalLogin').style.display = 'none';
       document.getElementById('viewPortalRegister').style.display = 'none';
@@ -4112,7 +4116,7 @@ async function doCustomerRegister(e) {
     alert('❌ Errore di rete: ' + err.message);
   } finally {
     btn.disabled = false;
-    btn.textContent = '📝 Registrati & Ricevi Codice OTP';
+    btn.textContent = '📝 Registrati & Accedi Subito';
   }
 }
 

@@ -868,7 +868,10 @@ async function sendEmail(to, subject, html, attachments = []) {
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-      }
+      },
+      connectionTimeout: 4000,
+      greetingTimeout: 4000,
+      socketTimeout: 4000
     });
 
     await transporter.sendMail({
@@ -1198,8 +1201,8 @@ app.post('/api/apply', applyLimiter, (req, res) => {
 
     const trackingUrl = `${BASE_URL}/?track=${encodeURIComponent(applicationNumber)}`;
 
-    // Confirmation Email in Italian with tracking link
-    await sendEmail(
+    // Confirmation Email in Italian with tracking link (non-blocking background delivery)
+    sendEmail(
       email,
       `Conferma Acquisizione Pratica - ${applicationNumber} | CENTRO SERVIZIO STRANIERO`,
       emailBox(
@@ -1222,7 +1225,7 @@ app.post('/api/apply', applyLimiter, (req, res) => {
          
          <p>Cordiali saluti,<br><b>Ufficio Pratiche — CENTRO SERVIZIO STRANIERO</b></p>`
       )
-    );
+    ).catch(e => console.log("Nota invio email:", e.message));
 
     res.json({ success: true, applicationNumber });
   });
@@ -3443,48 +3446,55 @@ app.post('/api/auth/register', async (req, res) => {
         phone: (phone || '').trim(),
         passwordHash: hashPassword(password),
         role: 'customer',
-        status: 'pending_otp',
-        otp,
-        otpExpiresAt,
-        createdAt: new Date().toISOString()
+        status: 'active',
+        createdAt: new Date().toISOString(),
+        lastLogin: new Date().toISOString()
       };
       users.push(targetUser);
     } else {
       targetUser.name = name.trim();
       targetUser.phone = (phone || '').trim();
       targetUser.passwordHash = hashPassword(password);
-      targetUser.otp = otp;
-      targetUser.otpExpiresAt = otpExpiresAt;
-      targetUser.status = 'pending_otp';
+      targetUser.status = 'active';
+      targetUser.lastLogin = new Date().toISOString();
     }
 
     saveUsers(users);
 
-    // Send OTP email
+    // Create session token for immediate seamless login
+    const token = crypto.randomBytes(32).toString('hex');
+    activeAuthTokens.set(token, {
+      userId: targetUser.id,
+      email: targetUser.email,
+      name: targetUser.name,
+      role: targetUser.role,
+      expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000
+    });
+
+    // Send Welcome Email in background
     const emailHtml = emailBox(
-      '🔐 Verifica il tuo Account — CENTRO SERVIZIO STRANIERO',
+      '🎉 Benvenuto su CENTRO SERVIZIO STRANIERO',
       `<p>Gentile <b>${targetUser.name}</b>,</p>
        <p>Grazie per esserti registrato al portale di <b>CENTRO SERVIZIO STRANIERO</b>.</p>
-       <p>Per completare l'attivazione del tuo account personale, inserisci il seguente codice di sicurezza OTP:</p>
-
-       <div style="background:#f0fdf4;border:2px dashed #16a34a;padding:16px;border-radius:8px;text-align:center;margin:24px 0;">
-         <span style="font-size:32px;font-weight:900;letter-spacing:6px;color:#166534;">${otp}</span>
-         <p style="font-size:12px;color:#15803d;margin:8px 0 0;">Il codice è valido per 10 minuti.</p>
-       </div>
-
-       <p>Se non hai richiesto tu questa registrazione, puoi ignorare questa email in sicurezza.</p>
+       <p>Il tuo account personale è stato attivato con successo. Puoi accedere in qualsiasi momento per consultare lo stato delle tue pratiche e richiedere nuovi servizi.</p>
        <p>Cordiali saluti,<br><b>CENTRO SERVIZIO STRANIERO</b></p>`
     );
 
-    sendEmail(cleanEmail, `Il tuo codice di verifica OTP: ${otp} — CENTRO SERVIZIO STRANIERO`, emailHtml).catch(e => {
-      console.error('Error sending OTP email:', e.message);
+    sendEmail(cleanEmail, 'Benvenuto su CENTRO SERVIZIO STRANIERO', emailHtml).catch(e => {
+      console.log('Nota invio email benvenuto:', e.message);
     });
 
     res.json({
       success: true,
-      requiresOtp: true,
-      email: cleanEmail,
-      message: 'Codice OTP inviato alla tua email. Controlla la tua casella di posta.'
+      token,
+      user: {
+        id: targetUser.id,
+        name: targetUser.name,
+        email: targetUser.email,
+        phone: targetUser.phone,
+        role: targetUser.role
+      },
+      message: 'Registrazione completata con successo!'
     });
 
   } catch (err) {
@@ -3610,16 +3620,14 @@ app.post('/api/auth/login', authLimiter, async (req, res) => {
       return res.status(403).json({ error: 'Il tuo account è temporaneamente sospeso. Contatta l\'ufficio per assistenza.' });
     }
 
-    if (user.status === 'pending_otp') {
-      return res.json({
-        requiresOtp: true,
-        email: user.email,
-        message: 'Account in attesa di verifica. Inserisci il codice OTP inviato alla tua email.'
-      });
-    }
-
     if (!verifyPassword(password, user.passwordHash)) {
       return res.status(401).json({ error: 'Email o password non corretti.' });
+    }
+
+    if (user.status === 'pending_otp') {
+      user.status = 'active';
+      user.otp = null;
+      user.otpExpiresAt = null;
     }
 
     // Transparently upgrade legacy password hash to 100,000 iterations PBKDF2

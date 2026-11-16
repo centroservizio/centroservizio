@@ -326,5 +326,35 @@
     "status": "saldata",
     "pdfFile": "RIC-2026-005.pdf",
     "emailSent": true
+  },
+  {
+    "invoiceNumber": "RIC-2026-006",
+    "createdAt": "2026-11-07T23:55:50.245Z",
+    "customerName": "TARAK AHMED",
+    "customerEmail": "tarakahmed1356@gmail.com",
+    "customerAddress": "via ponticello arginello 8",
+    "codiceFiscale": "HMDTRK99H04Z249C",
+    "items": [
+      {
+        "description": "Paga  per cie attivare",
+        "qty": 1,
+        "unitPrice": 22
+      }
+    ],
+    "invoiceDate": "07/11/2026",
+    "dueDate": "07/12/2026",
+    "taxRate": 0,
+    "notes": "",
+    "linkedApplication": "CSS-2026-41077",
+    "subtotal": 22,
+    "taxAmount": 0,
+    "grandTotal": 22,
+    "docType": "ricevuta",
+    "paymentMethod": "Carta POS / Bancomat",
+    "paymentDate": "07/11/2026",
+    "paymentRef": "REF-udcsagorhossain@gmail.com",
+    "status": "saldata",
+    "pdfFile": "RIC-2026-006.pdf",
+    "emailSent": true
   }
 ]

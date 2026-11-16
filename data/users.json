@@ -8,8 +8,8 @@
     "role": "admin",
     "status": "active",
     "createdAt": "2026-11-01T00:16:34.707Z",
-    "lastLogin": "2026-11-04T14:09:19.404Z",
-    "updatedAt": "2026-11-03T23:14:35.201Z"
+    "lastLogin": "2026-11-05T23:45:27.696Z",
+    "updatedAt": "2026-11-04T21:27:24.220Z"
   },
   {
     "id": "USR-1793492264046-963",
@@ -49,5 +49,15 @@
     "otpExpiresAt": null,
     "createdAt": "2026-11-03T23:17:07.145Z",
     "lastLogin": "2026-11-03T23:17:46.712Z"
+  },
+  {
+    "id": "USR-1794095544528-744",
+    "name": "TARAK AHMED",
+    "email": "tarakahmed1356@gmail.com",
+    "phone": "3248744520",
+    "passwordHash": "pbkdf2:100000:297e7c933759173a51c5b0a04d98b1ca:e369071ded51a80d8fa99daa9353eda795f2b4c226669b6fd3a961df3171494ff4f05507d15e448b9c35d685c26f752da7b3e6a026fb92d18d9db4c5df8c454a",
+    "role": "customer",
+    "status": "active",
+    "createdAt": "2026-11-07T23:52:24.568Z"
   }
 ]
