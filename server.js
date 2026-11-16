@@ -857,8 +857,82 @@ async function generateAllegato1PDF(data) {
 
 // Nodemailer Email Sending Helper
 async function sendEmail(to, subject, html, attachments = []) {
+  // Option 1: Brevo HTTPS REST API (Port 443 - Works seamlessly on Render Free Tier!)
+  if (process.env.BREVO_API_KEY) {
+    try {
+      const senderEmail = process.env.EMAIL_USER || 'centroserviziocarpi@gmail.com';
+      const brevoPayload = {
+        sender: { name: 'CENTRO SERVIZIO STRANIERO', email: senderEmail },
+        to: [{ email: to }],
+        subject,
+        htmlContent: html
+      };
+
+      if (attachments && attachments.length > 0) {
+        brevoPayload.attachment = attachments.map(att => {
+          let base64Content = '';
+          if (att.content && Buffer.isBuffer(att.content)) {
+            base64Content = att.content.toString('base64');
+          } else if (att.path && fs.existsSync(att.path)) {
+            base64Content = fs.readFileSync(att.path).toString('base64');
+          }
+          return {
+            name: att.filename || 'documento.pdf',
+            content: base64Content
+          };
+        }).filter(a => a.content);
+      }
+
+      const brevoRes = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': process.env.BREVO_API_KEY
+        },
+        body: JSON.stringify(brevoPayload)
+      });
+
+      if (brevoRes.ok) {
+        console.log('[Email Brevo HTTPS] Inviata con successo a:', to);
+        return true;
+      } else {
+        const errDetails = await brevoRes.text();
+        console.error('[Email Brevo Error]:', errDetails);
+      }
+    } catch (err) {
+      console.error('[Email Brevo Catch]:', err.message);
+    }
+  }
+
+  // Option 2: Resend HTTPS REST API (Port 443)
+  if (process.env.RESEND_API_KEY) {
+    try {
+      const resendFrom = process.env.RESEND_FROM || 'CENTRO SERVIZIO STRANIERO <onboarding@resend.dev>';
+      const resendRes = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
+        },
+        body: JSON.stringify({
+          from: resendFrom,
+          to: [to],
+          subject,
+          html
+        })
+      });
+      if (resendRes.ok) {
+        console.log('[Email Resend HTTPS] Inviata con successo a:', to);
+        return true;
+      }
+    } catch (err) {
+      console.error('[Email Resend Catch]:', err.message);
+    }
+  }
+
+  // Option 3: Nodemailer Gmail SMTP (Localhost / Standard SMTP)
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.log("Email non inviata (EMAIL_USER o EMAIL_PASS non configurati nel .env):", subject);
+    console.log("Email non inviata (Nessun provider email configurato nel .env):", subject);
     return false;
   }
 
@@ -869,9 +943,9 @@ async function sendEmail(to, subject, html, attachments = []) {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
       },
-      connectionTimeout: 4000,
-      greetingTimeout: 4000,
-      socketTimeout: 4000
+      connectionTimeout: 5000,
+      greetingTimeout: 5000,
+      socketTimeout: 5000
     });
 
     await transporter.sendMail({
@@ -882,10 +956,10 @@ async function sendEmail(to, subject, html, attachments = []) {
       attachments
     });
 
-    console.log("Email inviata con successo a:", to);
+    console.log("Email inviata con successo via Gmail SMTP a:", to);
     return true;
   } catch (err) {
-    console.log("Errore invio email:", err.message);
+    console.log("Errore invio email Gmail SMTP:", err.message);
     return false;
   }
 }
@@ -3446,55 +3520,50 @@ app.post('/api/auth/register', async (req, res) => {
         phone: (phone || '').trim(),
         passwordHash: hashPassword(password),
         role: 'customer',
-        status: 'active',
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString()
+        status: 'pending_otp',
+        otp,
+        otpExpiresAt,
+        createdAt: new Date().toISOString()
       };
       users.push(targetUser);
     } else {
       targetUser.name = name.trim();
       targetUser.phone = (phone || '').trim();
       targetUser.passwordHash = hashPassword(password);
-      targetUser.status = 'active';
-      targetUser.lastLogin = new Date().toISOString();
+      targetUser.otp = otp;
+      targetUser.otpExpiresAt = otpExpiresAt;
+      targetUser.status = 'pending_otp';
     }
 
     saveUsers(users);
 
-    // Create session token for immediate seamless login
-    const token = crypto.randomBytes(32).toString('hex');
-    activeAuthTokens.set(token, {
-      userId: targetUser.id,
-      email: targetUser.email,
-      name: targetUser.name,
-      role: targetUser.role,
-      expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000
-    });
+    console.log(`[AUTH OTP] Codice OTP generato per ${cleanEmail}: ${otp}`);
 
-    // Send Welcome Email in background
+    // Send OTP email
     const emailHtml = emailBox(
-      '🎉 Benvenuto su CENTRO SERVIZIO STRANIERO',
+      '🔐 Verifica il tuo Account — CENTRO SERVIZIO STRANIERO',
       `<p>Gentile <b>${targetUser.name}</b>,</p>
        <p>Grazie per esserti registrato al portale di <b>CENTRO SERVIZIO STRANIERO</b>.</p>
-       <p>Il tuo account personale è stato attivato con successo. Puoi accedere in qualsiasi momento per consultare lo stato delle tue pratiche e richiedere nuovi servizi.</p>
+       <p>Per completare l'attivazione del tuo account personale, inserisci il seguente codice di sicurezza OTP:</p>
+
+       <div style="background:#f0fdf4;border:2px dashed #16a34a;padding:16px;border-radius:8px;text-align:center;margin:24px 0;">
+         <span style="font-size:32px;font-weight:900;letter-spacing:6px;color:#166534;">${otp}</span>
+         <p style="font-size:12px;color:#15803d;margin:8px 0 0;">Il codice è valido per 10 minuti.</p>
+       </div>
+
+       <p>Se non hai richiesto tu questa registrazione, puoi ignorare questa email in sicurezza.</p>
        <p>Cordiali saluti,<br><b>CENTRO SERVIZIO STRANIERO</b></p>`
     );
 
-    sendEmail(cleanEmail, 'Benvenuto su CENTRO SERVIZIO STRANIERO', emailHtml).catch(e => {
-      console.log('Nota invio email benvenuto:', e.message);
+    sendEmail(cleanEmail, `Il tuo codice di verifica OTP: ${otp} — CENTRO SERVIZIO STRANIERO`, emailHtml).catch(e => {
+      console.error('Errore invio email OTP:', e.message);
     });
 
     res.json({
       success: true,
-      token,
-      user: {
-        id: targetUser.id,
-        name: targetUser.name,
-        email: targetUser.email,
-        phone: targetUser.phone,
-        role: targetUser.role
-      },
-      message: 'Registrazione completata con successo!'
+      requiresOtp: true,
+      email: cleanEmail,
+      message: 'Codice OTP inviato alla tua email. Controlla la tua casella di posta.'
     });
 
   } catch (err) {
@@ -3625,9 +3694,11 @@ app.post('/api/auth/login', authLimiter, async (req, res) => {
     }
 
     if (user.status === 'pending_otp') {
-      user.status = 'active';
-      user.otp = null;
-      user.otpExpiresAt = null;
+      return res.json({
+        requiresOtp: true,
+        email: user.email,
+        message: 'Account in attesa di verifica. Inserisci il codice OTP inviato alla tua email.'
+      });
     }
 
     // Transparently upgrade legacy password hash to 100,000 iterations PBKDF2
